@@ -37,7 +37,7 @@
 
    ```text
    user=root
-   password=123456
+   password=
    database=dormitory_system
    ```
 
