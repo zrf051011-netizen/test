@@ -15,8 +15,13 @@
     </c:choose>
     <title>${resolvedPageTitle} - 宿舍运营中心</title>
     <link rel="stylesheet" href="${ctx}/css/app.css?v=202607111245">
+    <link rel="stylesheet" href="${ctx}/css/app-liquid.css?v=202607130200">
 </head>
 <body class="app-body page-${activeMenu}">
+<canvas class="app-liquid-scene"
+        data-app-liquid-scene
+        data-liquid-background="${ctx}/static/images/login-bg.png"
+        aria-hidden="true"></canvas>
 <svg class="ui-icon-sprite" aria-hidden="true">
     <symbol id="icon-overview" viewBox="0 0 24 24">
         <rect x="3" y="3" width="7" height="7" rx="2"/>
