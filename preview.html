@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DormFlow 风格预览</title>
+    <link rel="stylesheet" href="src/main/webapp/css/app.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">D</div>
+            <div>
+                <strong>DormFlow</strong>
+                <span>宿舍运营中心</span>
+            </div>
+        </div>
+        <nav class="nav-list">
+            <a class="nav-item active" href="#"><span>OV</span>楼栋总览</a>
+            <a class="nav-item" href="#"><span>RM</span>房态板</a>
+            <a class="nav-item" href="#"><span>ST</span>学生列表</a>
+            <a class="nav-item" href="#"><span>FX</span>报修处理</a>
+            <a class="nav-item" href="#"><span>IN</span>入住办理</a>
+        </nav>
+        <div class="sidebar-foot">
+            <div class="role-pill">楼栋管理员</div>
+            <small>JavaWeb · JSP · MySQL</small>
+        </div>
+    </aside>
+    <section class="workspace">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Dormitory Operations</p>
+                <h1>楼栋总览</h1>
+            </div>
+            <div class="top-actions">
+                <button class="ghost-btn">修改密码</button>
+                <div class="user-chip">
+                    <span>张楼管</span>
+                    <small>zhanglou</small>
+                </div>
+                <a class="logout-btn" href="#">退出</a>
+            </div>
+        </header>
+        <main class="content">
+            <section class="stats-grid">
+                <article class="stat-card"><span>负责楼栋</span><strong>2</strong><small>按当前楼管权限统计</small></article>
+                <article class="stat-card"><span>宿舍数量</span><strong>6</strong><small>可查看和办理的宿舍</small></article>
+                <article class="stat-card"><span>入住率</span><strong>42%</strong><small>10/24 床位已使用</small></article>
+                <article class="stat-card"><span>待处理报修</span><strong>3</strong><small>处理中 1 条</small></article>
+            </section>
+            <section class="dashboard-grid">
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h2>房态速览</h2>
+                            <p>颜色直接反映可入住、已满、维修中</p>
+                        </div>
+                        <a class="link-btn" href="#">查看全部</a>
+                    </div>
+                    <div class="room-grid">
+                        <article class="room-card status-AVAILABLE">
+                            <div class="room-top">
+                                <div><div class="room-name">301</div><div class="room-building">A栋 · 3层</div></div>
+                                <span class="badge status-AVAILABLE">可入住</span>
+                            </div>
+                            <div class="room-capacity"><strong>2/4</strong><div class="bar"><span style="width:50%"></span></div></div>
+                        </article>
+                        <article class="room-card status-FULL">
+                            <div class="room-top">
+                                <div><div class="room-name">302</div><div class="room-building">A栋 · 3层</div></div>
+                                <span class="badge status-FULL">已满</span>
+                            </div>
+                            <div class="room-capacity"><strong>4/4</strong><div class="bar"><span style="width:100%"></span></div></div>
+                        </article>
+                        <article class="room-card status-AVAILABLE">
+                            <div class="room-top">
+                                <div><div class="room-name">303</div><div class="room-building">A栋 · 3层</div></div>
+                                <span class="badge status-AVAILABLE">可入住</span>
+                            </div>
+                            <div class="room-capacity"><strong>1/4</strong><div class="bar"><span style="width:25%"></span></div></div>
+                        </article>
+                        <article class="room-card status-REPAIR">
+                            <div class="room-top">
+                                <div><div class="room-name">304</div><div class="room-building">A栋 · 3层</div></div>
+                                <span class="badge status-REPAIR">维修中</span>
+                            </div>
+                            <div class="room-capacity"><strong>0/4</strong><div class="bar"><span style="width:0%"></span></div></div>
+                        </article>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h2>最近报修</h2>
+                            <p>本楼栋需要关注的维修问题</p>
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <tbody>
+                        <tr><td><strong>301 · 网络</strong><div class="muted">李四</div></td><td><span class="badge status-PENDING">待处理</span></td></tr>
+                        <tr><td><strong>303 · 门锁</strong><div class="muted">赵六</div></td><td><span class="badge status-DOING">处理中</span></td></tr>
+                        <tr><td><strong>302 · 水电</strong><div class="muted">王五</div></td><td><span class="badge status-DONE">已完成</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </section>
+</div>
+</body>
+</html>

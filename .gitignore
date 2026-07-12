@@ -1,0 +1,16 @@
+target/
+tmp/
+backups/
+audit-output/
+report-tools/bin/
+tmp-start-tomcat.bat
+
+.idea/
+*.iml
+
+tools/apache-maven-*/
+tools/apache-tomcat-*/
+tools/*.zip
+tools/*.zip.sha512
+
+*.log
