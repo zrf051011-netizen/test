@@ -36,7 +36,7 @@
 
 
 
-禁止引入或迁移到：
+不得替换或迁移现有核心技术栈为：
 
 
 
@@ -46,25 +46,7 @@
 
 \- jakarta.servlet
 
-\- React
-
-\- Vue
-
-\- Angular
-
-\- Tailwind CSS
-
-\- shadcn
-
-\- TypeScript
-
-\- Node.js
-
-\- npm
-
-\- Vite
-
-\- Webpack
+允许在不替换 JSP / Servlet / Tomcat / Maven 主体、不改变现有业务骨架与部署方式的前提下，附加使用前端增强技术或工具链。
 
 
 
@@ -118,7 +100,7 @@
 
 
 
-液态玻璃效果只能使用：
+液态玻璃效果允许使用：
 
 
 
@@ -134,21 +116,21 @@
 
 \- CSS 自定义属性
 
-
-
-禁止使用：
-
-
-
 \- WebGL
 
 \- Canvas
 
 \- SVG displacement filter
 
-\- 鼠标跟随按钮
-
 \- 复杂光学折射
+
+\- 原生浏览器 Shader / GLSL
+
+\- 为视觉增强所需的本地前端资源与第三方实现思路
+
+
+
+新增技术只能作为当前页面的渐进增强层；加载失败时必须保留可用的 CSS 毛玻璃降级，且不得接管登录业务逻辑。
 
 \- 远程图片
 
@@ -175,6 +157,10 @@
 \- 登录页专用原生 JavaScript
 
 \- 必要的本地 SVG 图标
+
+\- 登录页专用 Canvas / WebGL Shader
+
+\- 必要的本地位移贴图或光学纹理
 
 
 

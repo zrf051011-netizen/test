@@ -8,11 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 - 宿舍管理系统</title>
     <link rel="stylesheet" href="${ctx}/css/app.css?v=202607101620">
-    <link rel="stylesheet" href="<c:url value='/css/login.css'/>">
+    <link rel="stylesheet" href="${ctx}/css/login.css?v=202607130160">
 </head>
 <body class="login-body login-page" style="--login-bg-image: url('${pageContext.request.contextPath}/static/images/login-bg.png');">
 <main class="login-shell">
-    <section class="login-visual">
+    <section class="login-visual login-visual--liquid"
+             data-liquid-glass
+             data-liquid-variant="dark"
+             data-liquid-background="${ctx}/static/images/login-bg.png">
+        <canvas class="login-liquid-canvas" aria-hidden="true"></canvas>
         <div class="brand large">
             <div class="brand-mark" aria-label="DormFlow logo">
                 <svg class="brand-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
@@ -112,7 +116,10 @@
         </div>
     </section>
 
-    <section class="login-card">
+    <section class="login-card login-card--liquid"
+             data-liquid-glass
+             data-liquid-background="${ctx}/static/images/login-bg.png">
+        <canvas class="login-liquid-canvas" aria-hidden="true"></canvas>
         <div class="login-heading">
             <p class="eyebrow">欢迎回来</p>
             <h2>登录系统</h2>
@@ -195,5 +202,6 @@
 
 <script>window.APP_CONTEXT = '${ctx}';</script>
 <script src="${ctx}/js/app.js?v=202607101620"></script>
+    <script src="${ctx}/js/login-liquid-glass.js?v=202607130160"></script>
 </body>
 </html>
