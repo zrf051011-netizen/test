@@ -14,7 +14,7 @@
         </c:otherwise>
     </c:choose>
     <title>${resolvedPageTitle} - 宿舍运营中心</title>
-    <link rel="stylesheet" href="${ctx}/css/app.css?v=202607111245">
+    <link rel="stylesheet" href="${ctx}/css/app.css?v=20260713student-timeline-scroll1">
     <link rel="stylesheet" href="${ctx}/css/app-liquid.css?v=202607130200">
 </head>
 <body class="app-body page-${activeMenu}">
@@ -180,9 +180,10 @@
                 <span>您好，${sessionScope.loginUser.realName}，以下是最新数据面板</span>
             </div>
             <div class="top-actions">
+                <c:if test="${noticeEnabled}">
                 <div class="notice-center" data-notice-root>
                     <button class="notice-indicator" type="button" data-notice-toggle
-                            aria-label="${noticeCount} 条待处理事项" aria-expanded="false" aria-controls="noticePanel">
+                            aria-label="${noticeCount} 条报修待办" aria-expanded="false" aria-controls="noticePanel">
                         <svg aria-hidden="true"><use href="#icon-bell"/></svg>
                         <c:if test="${noticeCount gt 0}">
                             <span class="notice-badge">
@@ -196,7 +197,7 @@
                     <div class="notice-panel" id="noticePanel" data-notice-panel hidden>
                         <div class="notice-panel-head">
                             <div>
-                                <strong>待办提醒</strong>
+                                <strong>报修待办</strong>
                                 <span>${noticeTitle}</span>
                             </div>
                             <c:if test="${noticeCount gt 0}"><b>${noticeCount}</b></c:if>
@@ -206,7 +207,7 @@
                                 <c:when test="${empty noticeRepairs}">
                                     <div class="notice-empty">
                                         <svg aria-hidden="true"><use href="#icon-bell"/></svg>
-                                        <strong>暂无待处理事项</strong>
+                                        <strong>暂无报修待办</strong>
                                         <span>当前没有你需要处理的报修。</span>
                                     </div>
                                 </c:when>
@@ -225,9 +226,10 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                        <a class="notice-panel-foot" href="${ctx}${noticeLink}">查看全部待办</a>
+                        <a class="notice-panel-foot" href="${ctx}${noticeLink}">查看全部报修</a>
                     </div>
                 </div>
+                </c:if>
                 <div class="user-chip">
                     <span class="user-avatar" aria-hidden="true"><svg><use href="#icon-users"/></svg></span>
                     <div>
