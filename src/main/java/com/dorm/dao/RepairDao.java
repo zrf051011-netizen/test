@@ -47,6 +47,13 @@ public class RepairDao extends BaseDao {
                 Repair.class, append(parts.params, size));
     }
 
+    public List<Repair> latestActionableByBuildingAdmin(int adminId, int size) {
+        return queryList(SELECT_REPAIR
+                        + " WHERE b.building_admin_id = ? AND r.status IN ('PENDING', 'DOING')"
+                        + " ORDER BY CASE WHEN r.status = 'PENDING' THEN 0 ELSE 1 END, r.report_time DESC LIMIT ?",
+                Repair.class, adminId, size);
+    }
+
     private QueryParts buildWhere(String keyword, String status, Integer buildingId, Integer adminId, Integer reporterId) {
         QueryParts parts = new QueryParts();
         parts.where.append(" WHERE 1=1");
@@ -105,6 +112,13 @@ public class RepairDao extends BaseDao {
 
     public int countOpenByReporter(int reporterId) {
         return queryNumber("SELECT COUNT(*) FROM repair WHERE reporter_id = ? AND status <> 'DONE'", reporterId).intValue();
+    }
+
+    public int countActionableByBuildingAdmin(int adminId) {
+        return queryNumber("SELECT COUNT(*) FROM repair r JOIN dormitory d ON r.dormitory_id = d.id "
+                        + "JOIN building b ON d.building_id = b.id "
+                        + "WHERE b.building_admin_id = ? AND r.status IN ('PENDING', 'DOING')",
+                adminId).intValue();
     }
 
     private Object[] append(List<Object> params, Object value) {

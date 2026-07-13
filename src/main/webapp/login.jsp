@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.dorm.service.DashboardService" %>
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
-<%
-    pageContext.setAttribute("stats", new DashboardService().getStats(null));
-%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -11,10 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 - 宿舍管理系统</title>
     <link rel="stylesheet" href="${ctx}/css/app.css?v=202607101620">
+    <link rel="stylesheet" href="${ctx}/css/login.css?v=202607130160">
 </head>
-<body class="login-body" style="--login-bg-image: url('${pageContext.request.contextPath}/static/images/login-bg.png');">
+<body class="login-body login-page" style="--login-bg-image: url('${pageContext.request.contextPath}/static/images/login-bg.png');">
 <main class="login-shell">
-    <section class="login-visual">
+    <section class="login-visual login-visual--liquid"
+             data-liquid-glass
+             data-liquid-variant="dark"
+             data-liquid-background="${ctx}/static/images/login-bg.png">
+        <canvas class="login-liquid-canvas" aria-hidden="true"></canvas>
         <div class="brand large">
             <div class="brand-mark" aria-label="DormFlow logo">
                 <svg class="brand-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
@@ -104,17 +106,20 @@
         </div>
 
         <div class="login-visual-bottom">
-            <p>平台数据概览</p>
+            <p>平台能力概览</p>
             <div class="visual-metrics">
-                <span><strong>${stats.studentCount}</strong>学生总数<small>实时统计</small></span>
-                <span><strong>${stats.bedCount - stats.usedBedCount}</strong>空闲床位<small>${stats.usedBedCount}/${stats.bedCount} 已使用</small></span>
-                <span><strong>${stats.occupancyRate}%</strong>入住率<small>按当前床位统计</small></span>
-                <span><strong>${stats.repairPendingCount}</strong>待处理报修<small>处理中 ${stats.repairDoingCount}</small></span>
+                <span><strong>4</strong>核心模块<small>统一业务入口</small></span>
+                <span><strong>3</strong>用户角色<small>分级权限管理</small></span>
+                <span><strong>统一</strong>管理平台<small>集中处理事务</small></span>
+                <span><strong>全程</strong>操作留痕<small>便于查询追踪</small></span>
             </div>
         </div>
     </section>
 
-    <section class="login-card">
+    <section class="login-card login-card--liquid"
+             data-liquid-glass
+             data-liquid-background="${ctx}/static/images/login-bg.png">
+        <canvas class="login-liquid-canvas" aria-hidden="true"></canvas>
         <div class="login-heading">
             <p class="eyebrow">欢迎回来</p>
             <h2>登录系统</h2>
@@ -122,18 +127,18 @@
         </div>
 
         <c:if test="${not empty error}">
-            <div class="alert error">${error}</div>
+            <div class="login-alert" role="alert" aria-live="polite">用户名或密码错误</div>
         </c:if>
 
         <form action="${ctx}/login" method="post" class="login-form">
             <input type="hidden" name="csrfToken" value="${csrfToken}">
             <label>
                 <span>用户名</span>
-                <input class="login-input user-input" type="text" name="username" value="${username}" placeholder="请输入用户名" required autofocus>
+                <input class="login-input user-input" type="text" name="username" value="${fn:escapeXml(username)}" placeholder="请输入用户名" autocomplete="username" required autofocus>
             </label>
             <label>
                 <span>密码</span>
-                <input class="login-input password-input" type="password" name="password" placeholder="请输入密码" required>
+                <input class="login-input password-input" type="password" name="password" placeholder="请输入密码" autocomplete="current-password" required>
             </label>
             <div class="login-options login-options-end">
                 <button class="forgot-link" type="button" data-open-forgot>忘记密码?</button>
@@ -141,12 +146,14 @@
             <button type="submit" class="primary-btn wide">进入工作台</button>
         </form>
 
-        <div class="demo-accounts">
-            <strong>测试账号</strong>
-            <span>admin / admin123</span>
-            <span>zhanglou / admin123</span>
-            <span>lisi / admin123</span>
-        </div>
+        <aside class="login-security" aria-label="安全提示">
+            <strong>安全提示</strong>
+            <ul>
+                <li>请使用学校分配的账号登录</li>
+                <li>请勿将密码提供给他人</li>
+                <li>离开设备前请退出系统</li>
+            </ul>
+        </aside>
     </section>
 </main>
 
@@ -195,5 +202,6 @@
 
 <script>window.APP_CONTEXT = '${ctx}';</script>
 <script src="${ctx}/js/app.js?v=202607101620"></script>
+    <script src="${ctx}/js/login-liquid-glass.js?v=202607130160"></script>
 </body>
 </html>

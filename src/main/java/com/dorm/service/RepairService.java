@@ -33,12 +33,20 @@ public class RepairService {
         return repairDao.latestOpen(adminId, reporterId, includeDoing, size);
     }
 
+    public List<Repair> latestActionableByBuildingAdmin(int adminId, int size) {
+        return repairDao.latestActionableByBuildingAdmin(adminId, size);
+    }
+
     public int countByStatus(String status, Integer adminId) {
         return repairDao.countByStatus(status, adminId);
     }
 
     public int countOpenByReporter(int reporterId) {
         return repairDao.countOpenByReporter(reporterId);
+    }
+
+    public int countActionableByBuildingAdmin(int adminId) {
+        return repairDao.countActionableByBuildingAdmin(adminId);
     }
 
     public void submit(int userId, String repairType, String description) {

@@ -36,7 +36,7 @@
     </div>
 </section>
 
-<section class="dashboard-grid">
+<section class="dashboard-grid student-dashboard-details">
     <div class="panel">
         <div class="panel-head">
             <div>

@@ -1,10 +1,8 @@
 package com.dorm.filter;
 
 import com.dorm.entity.Repair;
-import com.dorm.entity.Student;
 import com.dorm.entity.User;
 import com.dorm.service.RepairService;
-import com.dorm.service.StudentService;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,7 +19,6 @@ import java.util.List;
 @WebFilter("/*")
 public class NotificationFilter implements Filter {
     private final RepairService repairService = new RepairService();
-    private final StudentService studentService = new StudentService();
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
@@ -36,31 +33,21 @@ public class NotificationFilter implements Filter {
     }
 
     private void loadNotifications(HttpServletRequest request, User user) {
+        boolean enabled = false;
         int count = 0;
         List<Repair> repairs = Collections.emptyList();
         String link = "/";
-        String title = "待处理事项";
+        String title = "报修待办";
 
-        if ("ADMIN".equals(user.getRole())) {
-            count = repairService.countByStatus("PENDING", null);
-            repairs = repairService.latestOpen(null, null, false, 5);
-            link = "/admin/repairs?status=PENDING";
-            title = "全校待处理报修";
-        } else if ("BUILDING_ADMIN".equals(user.getRole())) {
-            count = repairService.countByStatus("PENDING", user.getId());
-            repairs = repairService.latestOpen(user.getId(), null, false, 5);
-            link = "/buildingadmin/repairs?status=PENDING";
-            title = "本楼栋待处理报修";
-        } else if ("STUDENT".equals(user.getRole())) {
-            Student student = studentService.findByUserId(user.getId());
-            if (student != null) {
-                count = repairService.countOpenByReporter(student.getId());
-                repairs = repairService.latestOpen(null, student.getId(), true, 5);
-            }
-            link = "/student/repairs";
-            title = "我的报修进度";
+        if ("BUILDING_ADMIN".equals(user.getRole())) {
+            enabled = true;
+            count = repairService.countActionableByBuildingAdmin(user.getId());
+            repairs = repairService.latestActionableByBuildingAdmin(user.getId(), 5);
+            link = "/buildingadmin/repairs";
+            title = "本楼栋待处理与处理中报修";
         }
 
+        request.setAttribute("noticeEnabled", enabled);
         request.setAttribute("noticeCount", count);
         request.setAttribute("noticeRepairs", repairs);
         request.setAttribute("noticeLink", link);

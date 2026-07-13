@@ -1,0 +1,364 @@
+/* Selective liquid-glass layer for authenticated application pages. */
+.app-body {
+    --liquid-canvas: #dbe8f1;
+    --liquid-canvas-deep: #9eb7c9;
+    --liquid-ink: #102033;
+    --liquid-muted: #5f7182;
+    --liquid-blue: #2b78b8;
+    --liquid-blue-soft: rgba(82, 160, 216, .16);
+    --liquid-gold: #b68135;
+    --liquid-edge: rgba(244, 251, 255, .72);
+    --liquid-edge-soft: rgba(180, 213, 235, .32);
+    --liquid-shadow: rgba(13, 39, 61, .16);
+    position: relative;
+    isolation: isolate;
+    color: var(--liquid-ink);
+    background-color: var(--liquid-canvas);
+    background-image:
+        linear-gradient(118deg, rgba(224, 238, 247, .9), rgba(183, 207, 223, .72)),
+        url('../static/images/login-bg.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.app-body::before {
+    content: "";
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 82% 8%, rgba(236, 249, 255, .72), transparent 29%),
+        radial-gradient(circle at 22% 92%, rgba(69, 128, 174, .18), transparent 34%),
+        linear-gradient(115deg, rgba(20, 55, 82, .08), transparent 48%);
+}
+
+.app-liquid-scene {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateZ(0);
+    transition: opacity .5s ease;
+}
+
+.app-body.is-app-liquid-ready .app-liquid-scene {
+    opacity: 1;
+}
+
+.app-body .app-shell {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+}
+
+.app-body .workspace {
+    position: relative;
+    min-width: 0;
+    background: rgba(222, 235, 244, .2);
+}
+
+.app-body.page-dashboard:has(.admin-dashboard-stats) {
+    background-color: var(--liquid-canvas);
+    background-image:
+        linear-gradient(118deg, rgba(224, 238, 247, .9), rgba(183, 207, 223, .72)),
+        url('../static/images/login-bg.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.app-body.page-dashboard:has(.admin-dashboard-stats) .workspace {
+    background: rgba(222, 235, 244, .2);
+}
+
+/* Deep glass is reserved for the persistent navigation rail. */
+.app-body .app-sidebar {
+    --sidebar-top: rgba(7, 27, 49, .82);
+    --sidebar-bottom: rgba(5, 20, 37, .76);
+    border-right-color: rgba(190, 225, 247, .16);
+    background:
+        radial-gradient(circle at 15% 2%, rgba(120, 194, 241, .14), transparent 25%),
+        linear-gradient(180deg, var(--sidebar-top), var(--sidebar-bottom));
+    box-shadow:
+        16px 0 38px rgba(2, 17, 31, .18),
+        inset -1px 0 0 rgba(255, 255, 255, .055),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+    -webkit-backdrop-filter: blur(28px) saturate(116%);
+    backdrop-filter: blur(28px) saturate(116%);
+}
+
+.app-body .app-sidebar .nav-item.active {
+    border-color: rgba(155, 215, 252, .26);
+    background:
+        linear-gradient(135deg, rgba(47, 145, 215, .27), rgba(89, 181, 236, .11));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .13),
+        0 10px 24px rgba(0, 65, 112, .17);
+}
+
+.app-body .app-sidebar .sidebar-foot {
+    border-color: rgba(199, 228, 247, .15);
+    background:
+        radial-gradient(circle at 12% 0%, rgba(255, 255, 255, .1), transparent 43%),
+        rgba(211, 235, 250, .075);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .09),
+        0 14px 30px rgba(0, 10, 26, .14);
+    -webkit-backdrop-filter: blur(18px) saturate(112%);
+    backdrop-filter: blur(18px) saturate(112%);
+}
+
+/* The top bar is a single broad glass sheet, not a collection of glass chips. */
+.app-body .topbar {
+    border-bottom: 1px solid rgba(178, 210, 231, .38);
+    background:
+        radial-gradient(ellipse 42% 24% at 14% 0%, rgba(255, 255, 255, .52), transparent 72%),
+        linear-gradient(112deg, rgba(236, 247, 253, .72), rgba(207, 226, 238, .54));
+    box-shadow:
+        0 14px 34px rgba(17, 48, 70, .08),
+        inset 0 1px 0 rgba(255, 255, 255, .72),
+        inset 0 -1px 0 rgba(127, 173, 203, .12);
+    -webkit-backdrop-filter: blur(30px) saturate(122%);
+    backdrop-filter: blur(30px) saturate(122%);
+}
+
+.app-body .topbar-title h1,
+.app-body .panel-head h2,
+.app-body .admin-dashboard-grid .dashboard-panel .panel-head h2 {
+    color: var(--liquid-ink);
+}
+
+.app-body .topbar-title > span,
+.app-body .panel-head p,
+.app-body .muted {
+    color: var(--liquid-muted);
+}
+
+.app-body .notice-indicator,
+.app-body .top-actions .ghost-btn {
+    border-color: rgba(164, 197, 220, .42);
+    background: rgba(239, 248, 253, .5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .68);
+    -webkit-backdrop-filter: blur(16px) saturate(112%);
+    backdrop-filter: blur(16px) saturate(112%);
+}
+
+.app-body .notice-indicator:hover,
+.app-body .notice-indicator[aria-expanded="true"],
+.app-body .top-actions .ghost-btn:hover {
+    border-color: rgba(64, 137, 189, .38);
+    color: #255f8d;
+    background: rgba(230, 244, 252, .72);
+}
+
+/* Strong liquid glass is suitable for floating, temporary surfaces. */
+.app-body .notice-panel,
+.app-body .modal {
+    border: 1px solid rgba(227, 244, 254, .68);
+    border-radius: 20px;
+    color: var(--liquid-ink);
+    background:
+        radial-gradient(ellipse 64% 10% at 18% 0%, rgba(255, 255, 255, .7), transparent 74%),
+        linear-gradient(145deg, rgba(235, 247, 253, .83), rgba(207, 228, 241, .72));
+    box-shadow:
+        0 30px 72px rgba(8, 38, 61, .24),
+        0 0 0 1px rgba(157, 199, 226, .1),
+        inset 0 1px 0 rgba(255, 255, 255, .82),
+        inset 1px 0 0 rgba(255, 255, 255, .35),
+        inset 0 -1px 0 rgba(74, 132, 173, .18);
+    -webkit-backdrop-filter: blur(30px) saturate(125%);
+    backdrop-filter: blur(30px) saturate(125%);
+}
+
+.app-body .notice-panel::before {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .92) 26%, rgba(95, 167, 216, .34) 74%, transparent);
+}
+
+.app-body .notice-panel-head,
+.app-body .notice-item {
+    border-color: rgba(143, 184, 212, .24);
+}
+
+.app-body .notice-item:hover {
+    background: rgba(219, 239, 250, .42);
+}
+
+.app-body .notice-panel-foot {
+    color: #27658f;
+    background: rgba(216, 236, 248, .52);
+}
+
+.app-body .modal-backdrop {
+    background: rgba(5, 22, 39, .48);
+    -webkit-backdrop-filter: blur(10px) saturate(92%);
+    backdrop-filter: blur(10px) saturate(92%);
+}
+
+.app-body .modal .form-grid input,
+.app-body .modal .password-field {
+    border-color: rgba(157, 194, 218, .48);
+    background: rgba(244, 250, 253, .62);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .62);
+}
+
+/* Dashboard summary cards: translucent enough to reveal the moving scene. */
+.app-body.page-dashboard .stat-card {
+    border: 1px solid rgba(228, 245, 255, .68);
+    border-radius: 20px;
+    background:
+        radial-gradient(ellipse 72% 18% at 15% 0%, rgba(255, 255, 255, .68), transparent 72%),
+        radial-gradient(circle at 100% 100%, rgba(73, 143, 191, .1), transparent 38%),
+        linear-gradient(145deg, rgba(231, 244, 251, .67), rgba(206, 226, 239, .52));
+    box-shadow:
+        0 18px 42px rgba(17, 50, 74, .13),
+        inset 0 1px 0 rgba(255, 255, 255, .84),
+        inset 1px 0 0 rgba(255, 255, 255, .34),
+        inset 0 -1px 0 rgba(71, 128, 168, .16);
+    -webkit-backdrop-filter: blur(22px) saturate(122%);
+    backdrop-filter: blur(22px) saturate(122%);
+    transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+
+.app-body.page-dashboard .stat-card:hover {
+    border-color: rgba(210, 240, 255, .88);
+    box-shadow:
+        0 22px 50px rgba(12, 48, 75, .17),
+        inset 0 1px 0 rgba(255, 255, 255, .94),
+        inset 1px 0 0 rgba(255, 255, 255, .42),
+        inset 0 -1px 0 rgba(55, 121, 168, .2);
+    transform: translateY(-2px);
+}
+
+.app-body.page-dashboard .stat-card strong,
+.app-body.page-dashboard .admin-dashboard-stat-card strong {
+    color: #102236;
+}
+
+.app-body.page-dashboard .stat-card > span:not(.stat-icon),
+.app-body.page-dashboard .stat-card small {
+    color: #607384;
+}
+
+.app-body.page-dashboard .stat-icon {
+    border-color: rgba(168, 205, 230, .42);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .62);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+/* Only large dashboard containers receive the medium-strength glass treatment. */
+.app-body.page-dashboard .content > .panel,
+.app-body.page-dashboard .content > .dashboard-grid > .panel,
+.app-body.page-dashboard .content > .dashboard-grid > div > .panel,
+.app-body.page-dashboard .admin-dashboard-grid .dashboard-panel,
+.app-body.page-dashboard .student-hero {
+    border: 1px solid rgba(218, 239, 252, .62);
+    border-radius: 22px;
+    background:
+        radial-gradient(ellipse 58% 11% at 18% 0%, rgba(255, 255, 255, .58), transparent 74%),
+        linear-gradient(145deg, rgba(235, 246, 252, .74), rgba(211, 230, 241, .62));
+    box-shadow:
+        0 20px 48px rgba(16, 48, 72, .12),
+        inset 0 1px 0 rgba(255, 255, 255, .78),
+        inset 1px 0 0 rgba(255, 255, 255, .28),
+        inset 0 -1px 0 rgba(69, 126, 166, .14);
+    -webkit-backdrop-filter: blur(24px) saturate(118%);
+    backdrop-filter: blur(24px) saturate(118%);
+}
+
+/* Data regions stay materially opaque for scanability. */
+.app-body.page-dashboard .data-table,
+.app-body.page-dashboard .record-table {
+    background: rgba(241, 248, 252, .78);
+}
+
+.app-body.page-dashboard .data-table th,
+.app-body.page-dashboard .record-table th {
+    color: #566a7c;
+    background: rgba(222, 237, 246, .88);
+}
+
+.app-body.page-dashboard .data-table td,
+.app-body.page-dashboard .record-table td {
+    border-color: rgba(141, 178, 203, .2);
+    background: rgba(247, 251, 253, .5);
+}
+
+.app-body.page-dashboard .quick-actions a {
+    border-color: rgba(176, 207, 228, .4);
+    background: rgba(232, 243, 249, .58);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .66);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.app-body.page-dashboard .quick-actions a:hover {
+    border-color: rgba(91, 159, 206, .34);
+    background: rgba(222, 239, 249, .82);
+}
+
+.app-body .primary-btn {
+    border-color: rgba(148, 94, 25, .72);
+    background:
+        linear-gradient(180deg, rgba(237, 199, 134, .94), rgba(177, 119, 46, .96));
+    box-shadow:
+        0 10px 22px rgba(123, 78, 20, .18),
+        inset 0 1px 0 rgba(255, 248, 230, .76),
+        inset 0 -1px 0 rgba(91, 54, 13, .22);
+}
+
+@media (max-width: 999px) {
+    .app-body .topbar {
+        background: rgba(225, 240, 249, .76);
+    }
+}
+
+@media (max-width: 760px) {
+    .app-body {
+        background-attachment: scroll;
+    }
+
+    .app-body .topbar {
+        -webkit-backdrop-filter: blur(22px) saturate(112%);
+        backdrop-filter: blur(22px) saturate(112%);
+    }
+
+    .app-body.page-dashboard .stat-card:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-liquid-scene,
+    .app-body.page-dashboard .stat-card {
+        transition: none !important;
+    }
+}
+
+@media (forced-colors: active), (prefers-reduced-transparency: reduce) {
+    .app-liquid-scene {
+        display: none;
+    }
+
+    .app-body,
+    .app-body .workspace,
+    .app-body .topbar,
+    .app-body .notice-panel,
+    .app-body .modal,
+    .app-body.page-dashboard .stat-card,
+    .app-body.page-dashboard .content > .panel,
+    .app-body.page-dashboard .content > .dashboard-grid > .panel,
+    .app-body.page-dashboard .content > .dashboard-grid > div > .panel,
+    .app-body.page-dashboard .admin-dashboard-grid .dashboard-panel,
+    .app-body.page-dashboard .student-hero {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}

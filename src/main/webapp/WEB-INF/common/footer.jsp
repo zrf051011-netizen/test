@@ -44,5 +44,6 @@
     window.APP_CONTEXT = '${ctx}';
 </script>
 <script src="${ctx}/js/app.js?v=202607101620"></script>
+<script src="${ctx}/js/app-liquid-glass.js?v=202607130200"></script>
 </body>
 </html>
