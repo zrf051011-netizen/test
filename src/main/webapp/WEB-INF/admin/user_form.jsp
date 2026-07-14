@@ -4,7 +4,7 @@
     <div class="panel-head">
         <div>
             <h2>${empty item ? '新增用户' : '编辑用户'}</h2>
-            <p>新增账号默认密码为 admin123</p>
+            <p>新增账号默认密码为 admin123；学生角色会同步创建学生档案</p>
         </div>
     </div>
     <form class="form-grid" method="post" action="${ctx}/admin/users">
@@ -31,6 +31,11 @@
             </select>
         </label>
         <label>
+            <span>学生学号（仅学生角色）</span>
+            <input type="text" name="studentNo" value="${studentProfile.studentNo}"
+                   maxlength="20" placeholder="可留空，系统将自动生成">
+        </label>
+        <label>
             <span>状态</span>
             <select name="status">
                 <option value="1" ${empty item || item.status == 1 ? 'selected' : ''}>启用</option>
@@ -44,4 +49,3 @@
     </form>
 </section>
 <%@ include file="/WEB-INF/common/footer.jsp" %>
-

@@ -57,6 +57,11 @@ public class UserDao extends BaseDao {
                 user.getRealName(), user.getPhone(), user.getRole(), user.getStatus(), user.getId());
     }
 
+    public int updateBasic(Connection conn, User user) throws SQLException {
+        return update(conn, "UPDATE `user` SET real_name = ?, phone = ?, role = ?, status = ? WHERE id = ?",
+                user.getRealName(), user.getPhone(), user.getRole(), user.getStatus(), user.getId());
+    }
+
     public int updatePassword(int userId, String password, String salt) {
         return update("UPDATE `user` SET password = ?, salt = ? WHERE id = ?", password, salt, userId);
     }

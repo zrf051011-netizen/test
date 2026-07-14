@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -217,7 +217,7 @@
                                             <i aria-hidden="true"><svg><use href="#icon-repair"/></svg></i>
                                             <span>
                                                 <strong><c:out value="${notice.repairType}"/></strong>
-                                                <small><c:out value="${notice.buildingName}"/>-<c:out value="${notice.roomNumber}"/> 路 <c:out value="${notice.reporterName}"/></small>
+                                                <small><c:out value="${notice.buildingName}"/>-<c:out value="${notice.roomNumber}"/> · <c:out value="${notice.reporterName}"/></small>
                                                 <time><fmt:formatDate value="${notice.reportTime}" pattern="MM-dd HH:mm"/></time>
                                             </span>
                                             <em class="status-${notice.status}">${notice.statusName}</em>
@@ -257,5 +257,4 @@
             <c:if test="${not empty param.error}">
                 <div class="alert error">${param.error}</div>
             </c:if>
-
 

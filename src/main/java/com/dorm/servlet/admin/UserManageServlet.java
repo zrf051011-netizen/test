@@ -23,6 +23,7 @@ public class UserManageServlet extends HttpServlet {
             int id = WebUtil.getInt(request, "id", 0);
             if (id > 0) {
                 request.setAttribute("item", userService.findById(id));
+                request.setAttribute("studentProfile", userService.findStudentProfile(id));
             }
             list(request, response, "/WEB-INF/admin/user_form.jsp");
             return;
@@ -53,7 +54,7 @@ public class UserManageServlet extends HttpServlet {
         user.setRole(WebUtil.getString(request, "role"));
         user.setStatus(WebUtil.getInt(request, "status", 1));
         try {
-            userService.saveUser(user);
+            userService.saveUser(user, WebUtil.getString(request, "studentNo"));
             response.sendRedirect(request.getContextPath() + "/admin/users?success=" + WebUtil.enc("保存成功"));
         } catch (BusinessException e) {
             response.sendRedirect(request.getContextPath() + "/admin/users?error=" + WebUtil.enc(e.getMessage()));

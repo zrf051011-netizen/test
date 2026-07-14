@@ -82,6 +82,10 @@ public class StudentDao extends BaseDao {
                 student.getStudentNo(), student.getGender(), student.getClassName(), student.getMajor(), student.getEmergencyContact(), student.getEmergencyPhone(), student.getId());
     }
 
+    public int updateStudentNo(Connection conn, int userId, String studentNo) throws SQLException {
+        return update(conn, "UPDATE student SET student_no = ? WHERE user_id = ?", studentNo, userId);
+    }
+
     public int updateDorm(Connection conn, int studentId, Integer dormitoryId, String status) throws SQLException {
         if (dormitoryId == null) {
             return update(conn, "UPDATE student SET dormitory_id = NULL, check_in_date = NULL, status = ? WHERE id = ?", status, studentId);

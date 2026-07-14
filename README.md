@@ -15,6 +15,35 @@
 
 注意：不建议使用 Tomcat 10，因为本项目使用 `javax.servlet` 包。
 
+## Docker 启动（推荐）
+
+本方案不会在宿主机安装 JDK、Maven、Tomcat 或 MySQL。Docker 会使用 Maven + JDK 8 构建 WAR，并通过 Tomcat 9 和 MySQL 8 运行项目。
+
+```bash
+docker compose up -d --build
+```
+
+启动完成后访问：
+
+```text
+http://localhost:8080/dormitory-system/
+```
+
+查看状态和日志：
+
+```bash
+docker compose ps
+docker compose logs -f web
+```
+
+停止容器但保留数据库数据：
+
+```bash
+docker compose down
+```
+
+MySQL 映射到宿主机的 `127.0.0.1:3307`。初始化 SQL 只会在数据库数据卷首次创建时执行；不要随意使用 `docker compose down -v`，该命令会删除容器数据库数据。
+
 ## 课程设计交付物
 
 - [`课程设计报告书.docx`](./课程设计报告书.docx)：按课程模板完成的设计报告。

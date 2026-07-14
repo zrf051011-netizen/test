@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 - 宿舍管理系统</title>
+    <link rel="icon" href="${ctx}/static/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="${ctx}/css/app.css?v=202607101620">
     <link rel="stylesheet" href="${ctx}/css/login.css?v=202607130160">
 </head>

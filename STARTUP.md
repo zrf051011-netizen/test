@@ -2,6 +2,19 @@
 
 This project is a Java Web application built with Servlet, JSP, Maven, Tomcat 9, and MySQL 8.
 
+## Docker (Recommended on Linux)
+
+The Docker setup keeps JDK 8, Maven, Tomcat 9, and MySQL 8 inside containers:
+
+```bash
+docker compose up -d --build
+docker compose ps
+```
+
+Open `http://localhost:8080/dormitory-system/`.
+
+Use `docker compose logs -f web` for application logs and `docker compose down` to stop the stack while preserving MySQL data. The initialization SQL runs only when the named MySQL volume is empty. Do not use `docker compose down -v` unless the database data is intentionally being reset.
+
 ## Local Environment Found
 
 - Java: `E:\java`, Java 18
